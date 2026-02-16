@@ -1,53 +1,48 @@
-import os
+def app_task():
+    tasks = []
+    print("----WELCOME TO TASK MANAGEMENT SYSTEM----")
 
-def create_file(filename):
-    try:
-        with open('filename', 'x') as f:
-            print(f"File Name : {filename} created successfully!")
-        except FileExistsError:
-            print(f"File name {filename} already exist!")
-        except Exception:
-            print("Error occoured!")
-def view_all_files():
-    files = os.listdir()
-    if not files:
-        print("file not found!")
-    else:
-        print("files in directory!")
-        for file in files:
-            print(file)
-    
+    total_task = int(input("Enter How many task added = "))
 
-def delete_file(filename):
-    try:
-        os.remove(filename)
-        print(f"{filename} deleted successfully!")
-    except FileNotFoundError:
-        print(f"{filename} not found!")
-    except Exception:
-        print("error occured!")
-
-
-
-
-
-
-
-
-
-
-def main():
+    for i in range(1, total_task+1):
+        task_name = input(f"Enter {i} task:  ")
+        tasks.append(task_name)
+    print(f"Al of Tasks : \n{tasks} ")
     while True:
-        print("---File manegement System----")
-        print("\nSelect \n1-Add File\n2-View All Files\n3-Delete File\n4-Read File\n5-Edit File\n6-Exit App\n")
+        Choice = int(input("Select 1-ADD\n2-UPDATE\n3-DELETE\n4-EXIT\n"))
+        if Choice == 1:
+            add = input("You added a task: ")
+            tasks.append(add)
+            print("Task added successfully!")
+            print(f"All Tasks: {tasks}")
+        elif Choice == 2:
+            update_value = input("Enter the task name for update : ")
+            if update_value in tasks:
+                new_task = input("Enter new task name: ")
+                up = tasks.index(update_value)
+                tasks[up] = new_task
+                print(f"Task update value is: {new_task}")
+                print(f"All Tasks: {tasks}")
+            else:
+                print("Inavalid Task")
+        elif Choice == 3:
+            del_value = input("Enter Task name for Delete : ")
+            if del_value in tasks:
+                ind = tasks.index(del_value)
+                del tasks[ind]
+                print("Task Delete successfully!")
+                print(f"All Tasks: {tasks}")
+            else:
+                print("Invalid task name")
+        elif Choice == 4:
+            print("Closing the Progammes")
+            break
+        else:
+            print("Invalid Choice")
 
-        choice = int(input("Enter your choice: "))
-        if choice == 1:
-            filename = input("Enter your file name: ")
-            create_file(filename)
-        elif choice == 2:
-            print("All Files are: ")
-            view_all_files()
-        elif choice == 3:
-            filename = input("Enter your file name to Delete: ")
-            delete_file(filename)
+if __name__ == "__main__":
+    app_task()
+
+
+
+
